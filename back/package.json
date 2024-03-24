@@ -29,7 +29,8 @@
     "#database/*": "./database/*.js",
     "#start/*": "./start/*.js",
     "#tests/*": "./tests/*.js",
-    "#config/*": "./config/*.js"
+    "#config/*": "./config/*.js",
+    "#utils/*": "./utils/*.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.1.1",
@@ -54,7 +55,7 @@
     "@adonisjs/core": "^6.2.2",
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^20.1.0",
-    "@vinejs/vine": "^1.7.1",
+    "@vinejs/vine": "^1.8.0",
     "better-sqlite3": "^9.4.3",
     "luxon": "^3.4.4",
     "reflect-metadata": "^0.2.1"
