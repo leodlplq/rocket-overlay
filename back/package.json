@@ -31,7 +31,8 @@
     "#tests/*": "./tests/*.js",
     "#config/*": "./config/*.js",
     "#utils/*": "./utils/*.js",
-    "#rules/*": "./app/rules/*.js"
+    "#rules/*": "./app/rules/*.js",
+    "#enums/*": "./app/enums/*.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^7.1.1",
@@ -59,6 +60,7 @@
     "@vinejs/vine": "^1.8.0",
     "better-sqlite3": "^9.4.3",
     "luxon": "^3.4.4",
+    "pusher": "^5.2.0",
     "reflect-metadata": "^0.2.1"
   },
   "eslintConfig": {
