@@ -21,7 +21,7 @@
       "#start/*": ["./start/*.js"],
       "#config/*": ["./config/*.js"],
       "#rules/*": ["./app/rules/*.js"],
-      "#enums/*": ["./app/enums/*.js"],
+      "#enums/*": ["./app/enums/*.js"]
     }
   }
 }

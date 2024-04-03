@@ -1,5 +1,7 @@
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
+import Configuration from './configuration.js'
 
 export default class Overlay extends BaseModel {
   @column({ isPrimary: true })
@@ -13,6 +15,9 @@ export default class Overlay extends BaseModel {
 
   @column()
   declare active: boolean
+
+  @hasMany(() => Configuration)
+  declare configurations: HasMany<typeof Configuration>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

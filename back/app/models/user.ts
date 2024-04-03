@@ -3,9 +3,10 @@ import { withAuthFinder } from '@adonisjs/auth'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
-import { BaseModel, belongsTo, column, computed } from '@adonisjs/lucid/orm'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, belongsTo, column, computed, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
+import Configuration from './configuration.js'
 import Role from './role.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -43,6 +44,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @belongsTo(() => Role)
   declare role: BelongsTo<typeof Role>
+
+  @hasMany(() => Configuration)
+  declare overlays: HasMany<typeof Configuration>
 
   @computed()
   get isAdmin() {
