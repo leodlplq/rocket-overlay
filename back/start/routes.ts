@@ -25,11 +25,13 @@ router
 
     router
       .group(() => {
-        router.resource('overlays', OverlaysController).apiOnly()
+        router.resource('overlays', OverlaysController).apiOnly().except(['index'])
       })
       .use(middleware.role({ guards: ['ADMIN'] }))
   })
   .use(middleware.auth({ guards: ['api'] }))
+
+router.get('/overlays', [OverlaysController, 'index'])
 
 const PATH_TRAVERSAL_REGEX = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
