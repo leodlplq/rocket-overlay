@@ -1,9 +1,10 @@
 import {
   Input as HeadlessInput,
-  type InputProps as HeadlessInputProps
+  type InputProps as HeadlessInputProps,
 } from '@headlessui/react'
 import { clsx } from 'clsx'
-import { forwardRef } from 'react'
+import { Eye, EyeClosed } from 'iconoir-react'
+import { forwardRef, useState } from 'react'
 
 const dateTypes = ['date', 'datetime-local', 'month', 'time', 'week']
 type DateType = (typeof dateTypes)[number]
@@ -20,8 +21,31 @@ export const Input = forwardRef<
       | 'text'
       | 'url'
       | DateType
+    showEyeIcon?: boolean
   } & HeadlessInputProps
 >(function Input({ className, ...props }, ref) {
+  const [showPassword, setShowPassword] = useState(false)
+
+  const showEyeIcon = () => {
+    if (props.type === 'password' && props.showEyeIcon) {
+      if (!showPassword) {
+        return (
+          <Eye
+            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(true)}
+          />
+        )
+      } else {
+        return (
+          <EyeClosed
+            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(false)}
+          />
+        )
+      }
+    }
+  }
+
   return (
     <span
       data-slot="control"
@@ -44,9 +68,8 @@ export const Input = forwardRef<
         'has-[[data-disabled]]:opacity-50 before:has-[[data-disabled]]:bg-zinc-950/5 before:has-[[data-disabled]]:shadow-none',
 
         // Invalid state
-        'before:has-[[data-invalid]]:shadow-red-500/10'
-      ])}
-    >
+        'before:has-[[data-invalid]]:shadow-red-500/10',
+      ])}>
       <HeadlessInput
         ref={ref}
         className={clsx([
@@ -64,7 +87,7 @@ export const Input = forwardRef<
               '[&::-webkit-datetime-edit-minute-field]:p-0',
               '[&::-webkit-datetime-edit-second-field]:p-0',
               '[&::-webkit-datetime-edit-millisecond-field]:p-0',
-              '[&::-webkit-datetime-edit-meridiem-field]:p-0'
+              '[&::-webkit-datetime-edit-meridiem-field]:p-0',
             ],
 
           // Basic layout
@@ -86,10 +109,12 @@ export const Input = forwardRef<
           'data-[invalid]:border-red-500 data-[invalid]:data-[hover]:border-red-500 data-[invalid]:dark:border-red-500 data-[invalid]:data-[hover]:dark:border-red-500',
 
           // Disabled state
-          'data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%]'
+          'data-[disabled]:border-zinc-950/20 dark:data-[hover]:data-[disabled]:border-white/15 data-[disabled]:dark:border-white/15 data-[disabled]:dark:bg-white/[2.5%]',
         ])}
         {...props}
+        type={showPassword ? 'text' : props.type}
       />
+      {showEyeIcon()}
     </span>
   )
 })
