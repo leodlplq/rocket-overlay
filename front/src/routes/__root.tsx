@@ -1,20 +1,19 @@
-import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
+import { AuthContextType } from '#/types/user'
+import Header from '#components/Header'
+import { QueryClient } from '@tanstack/react-query'
+import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
+import { SnackbarProvider } from 'notistack'
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<
+  AuthContextType & { queryClient: QueryClient }
+>()({
   component: () => (
     <>
-      <div className="p-2 flex gap-2">
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
-        </Link>
-      </div>
-      <hr />
+      <SnackbarProvider />
+      <Header />
       <Outlet />
       <TanStackRouterDevtools />
     </>
-  )
+  ),
 })

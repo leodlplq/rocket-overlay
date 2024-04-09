@@ -23,11 +23,11 @@ export const Input = forwardRef<
       | DateType
     showEyeIcon?: boolean
   } & HeadlessInputProps
->(function Input({ className, ...props }, ref) {
+>(function Input({ className, showEyeIcon, ...props }, ref) {
   const [showPassword, setShowPassword] = useState(false)
 
-  const showEyeIcon = () => {
-    if (props.type === 'password' && props.showEyeIcon) {
+  const displayShowIcon = () => {
+    if (props.type === 'password' && showEyeIcon) {
       if (!showPassword) {
         return (
           <Eye
@@ -114,7 +114,7 @@ export const Input = forwardRef<
         {...props}
         type={showPassword ? 'text' : props.type}
       />
-      {showEyeIcon()}
+      {displayShowIcon()}
     </span>
   )
 })

@@ -1,17 +1,17 @@
 import { queryOptions } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { getOverlays } from '../api/overlay'
+import { getOverlays } from '../api/queries/overlay'
 import { queryClient } from '../api/queryClient'
 import Example from '../components/test'
 
 const postsQueryOptions = queryOptions({
   queryKey: ['posts'],
-  queryFn: getOverlays
+  queryFn: getOverlays,
 })
 
 export const Route = createFileRoute('/about')({
   loader: () => queryClient.ensureQueryData(postsQueryOptions),
-  component: About
+  component: About,
 })
 
 function About() {

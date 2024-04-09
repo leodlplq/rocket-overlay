@@ -10,7 +10,7 @@ export default class AuthController {
     const user = await User.verifyCredentials(email, password)
     const token = await User.accessTokens.create(user)
 
-    return token
+    return { ...user.serialize(), token: token.toJSON().token }
   }
 
   async register({ request }: HttpContext) {
@@ -20,6 +20,6 @@ export default class AuthController {
     const user = await User.create(payload)
     const token = await User.accessTokens.create(user)
 
-    return token
+    return { ...user.serialize(), token: token.toJSON().token }
   }
 }
