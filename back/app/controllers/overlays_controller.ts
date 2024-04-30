@@ -5,7 +5,8 @@ import app from '@adonisjs/core/services/app'
 
 export default class OverlaysController {
   async index() {
-    return Overlay.all()
+    const overlays = await Overlay.all()
+    return overlays.toReversed()
   }
 
   async store({ request }: HttpContext) {
@@ -15,9 +16,14 @@ export default class OverlaysController {
       name: `${data.name.toLocaleLowerCase() + Date.now()}.webm`,
     })
 
+    await data.image.move(app.makePath('uploads/overlays/images'), {
+      name: `${data.name.toLocaleLowerCase() + Date.now()}.${data.image.extname}`,
+    })
+
     const overlay = await Overlay.create({
       name: data.name,
       videoUrl: data.video?.fileName ? `/uploads/overlays/${data.video?.fileName}` : null,
+      imageUrl: `/uploads/overlays/images/${data.image.fileName}`,
       active: data.active,
     })
 

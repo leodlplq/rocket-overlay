@@ -13,7 +13,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { enqueueSnackbar } from 'notistack'
 import { useContext } from 'react'
 
-export const Route = createFileRoute('/login')({
+export const Route = createFileRoute('/_default/login')({
   beforeLoad: ({ context }) => {
     if (context.user) {
       console.log('coucou')

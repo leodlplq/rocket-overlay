@@ -5,7 +5,7 @@ import {
   DialogTitle as HeadlessDialogTitle,
   Transition as HeadlessTransition,
   TransitionChild as HeadlessTransitionChild,
-  type DialogProps as HeadlessDialogProps
+  type DialogProps as HeadlessDialogProps,
 } from '@headlessui/react'
 import clsx from 'clsx'
 import type React from 'react'
@@ -21,7 +21,7 @@ const sizes = {
   '2xl': 'sm:max-w-2xl',
   '3xl': 'sm:max-w-3xl',
   '4xl': 'sm:max-w-4xl',
-  '5xl': 'sm:max-w-5xl'
+  '5xl': 'sm:max-w-5xl',
 }
 
 export function Alert({
@@ -45,8 +45,7 @@ export function Alert({
           enterTo="opacity-100"
           leave="ease-in duration-100"
           leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
+          leaveTo="opacity-0">
           <div className="fixed inset-0 flex w-screen justify-center overflow-y-auto bg-zinc-950/15 px-2 py-2 focus:outline-0 sm:px-6 sm:py-8 lg:px-8 lg:py-16 dark:bg-zinc-950/50" />
         </HeadlessTransitionChild>
 
@@ -57,8 +56,7 @@ export function Alert({
           enterTo="opacity-100"
           leave="ease-in duration-100"
           leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
+          leaveTo="opacity-0">
           <div className="grid min-h-full grid-rows-[1fr_auto_1fr] justify-items-center p-8 sm:grid-rows-[1fr_auto_3fr] sm:p-4">
             <HeadlessTransitionChild
               as={HeadlessDialogPanel}
@@ -72,8 +70,7 @@ export function Alert({
               enterTo="scale-100"
               leave="ease-in duration-100"
               leaveFrom="scale-100"
-              leaveTo="scale-100"
-            >
+              leaveTo="scale-100">
               {children}
             </HeadlessTransitionChild>
           </div>

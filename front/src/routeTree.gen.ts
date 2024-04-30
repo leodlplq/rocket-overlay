@@ -13,75 +13,87 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as RegisterImport } from './routes/register'
-import { Route as ProfileImport } from './routes/profile'
-import { Route as LoginImport } from './routes/login'
-import { Route as DashboardImport } from './routes/dashboard'
-import { Route as AboutImport } from './routes/about'
+import { Route as DefaultImport } from './routes/_default'
+import { Route as DashboardImport } from './routes/_dashboard'
+import { Route as DefaultRegisterImport } from './routes/_default.register'
+import { Route as DefaultLoginImport } from './routes/_default.login'
+import { Route as DashboardOverlaysIndexImport } from './routes/_dashboard.overlays.index'
+import { Route as DashboardOverlaysIdImport } from './routes/_dashboard.overlays.$id'
 
 // Create Virtual Routes
 
-const IndexLazyImport = createFileRoute('/')()
+const DefaultIndexLazyImport = createFileRoute('/_default/')()
 
 // Create/Update Routes
 
-const RegisterRoute = RegisterImport.update({
-  path: '/register',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const ProfileRoute = ProfileImport.update({
-  path: '/profile',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginRoute = LoginImport.update({
-  path: '/login',
+const DefaultRoute = DefaultImport.update({
+  id: '/_default',
   getParentRoute: () => rootRoute,
 } as any)
 
 const DashboardRoute = DashboardImport.update({
-  path: '/dashboard',
+  id: '/_dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
-const AboutRoute = AboutImport.update({
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexLazyRoute = IndexLazyImport.update({
+const DefaultIndexLazyRoute = DefaultIndexLazyImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+  getParentRoute: () => DefaultRoute,
+} as any).lazy(() =>
+  import('./routes/_default.index.lazy').then((d) => d.Route),
+)
+
+const DefaultRegisterRoute = DefaultRegisterImport.update({
+  path: '/register',
+  getParentRoute: () => DefaultRoute,
+} as any)
+
+const DefaultLoginRoute = DefaultLoginImport.update({
+  path: '/login',
+  getParentRoute: () => DefaultRoute,
+} as any)
+
+const DashboardOverlaysIndexRoute = DashboardOverlaysIndexImport.update({
+  path: '/overlays/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardOverlaysIdRoute = DashboardOverlaysIdImport.update({
+  path: '/overlays/$id',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexLazyImport
-      parentRoute: typeof rootRoute
-    }
-    '/about': {
-      preLoaderRoute: typeof AboutImport
-      parentRoute: typeof rootRoute
-    }
-    '/dashboard': {
+    '/_dashboard': {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/login': {
-      preLoaderRoute: typeof LoginImport
+    '/_default': {
+      preLoaderRoute: typeof DefaultImport
       parentRoute: typeof rootRoute
     }
-    '/profile': {
-      preLoaderRoute: typeof ProfileImport
-      parentRoute: typeof rootRoute
+    '/_default/login': {
+      preLoaderRoute: typeof DefaultLoginImport
+      parentRoute: typeof DefaultImport
     }
-    '/register': {
-      preLoaderRoute: typeof RegisterImport
-      parentRoute: typeof rootRoute
+    '/_default/register': {
+      preLoaderRoute: typeof DefaultRegisterImport
+      parentRoute: typeof DefaultImport
+    }
+    '/_default/': {
+      preLoaderRoute: typeof DefaultIndexLazyImport
+      parentRoute: typeof DefaultImport
+    }
+    '/_dashboard/overlays/$id': {
+      preLoaderRoute: typeof DashboardOverlaysIdImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/overlays/': {
+      preLoaderRoute: typeof DashboardOverlaysIndexImport
+      parentRoute: typeof DashboardImport
     }
   }
 }
@@ -89,12 +101,15 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren([
-  IndexLazyRoute,
-  AboutRoute,
-  DashboardRoute,
-  LoginRoute,
-  ProfileRoute,
-  RegisterRoute,
+  DashboardRoute.addChildren([
+    DashboardOverlaysIdRoute,
+    DashboardOverlaysIndexRoute,
+  ]),
+  DefaultRoute.addChildren([
+    DefaultLoginRoute,
+    DefaultRegisterRoute,
+    DefaultIndexLazyRoute,
+  ]),
 ])
 
 /* prettier-ignore-end */

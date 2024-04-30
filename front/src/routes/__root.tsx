@@ -1,5 +1,4 @@
 import { AuthContextType } from '#/types/user'
-import Header from '#components/Header'
 import { QueryClient } from '@tanstack/react-query'
 import { createRootRouteWithContext, Outlet } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/router-devtools'
@@ -11,7 +10,6 @@ export const Route = createRootRouteWithContext<
   component: () => (
     <>
       <SnackbarProvider />
-      <Header />
       <Outlet />
       <TanStackRouterDevtools />
     </>

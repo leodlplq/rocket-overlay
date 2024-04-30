@@ -1,6 +1,6 @@
 import { AuthContext } from '#/context/AuthProvider'
 import { AuthContextType } from '#/types/user'
-import whiteLogo from '#assets/logo-white.svg'
+import { Logo } from '#components/Logo'
 import { Button } from '#components/catalyst/button'
 import { Link } from '#components/catalyst/link'
 import { useContext } from 'react'
@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <div className="px-4 py-4 flex justify-between items-center">
       <Link to={'/'}>
-        <img src={whiteLogo} className="h-12" />
+        <Logo />
       </Link>
 
       <ul>

@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.boolean('active').notNullable().defaultTo(true)
       table.string('video_url').nullable()
-
+      table.string('image_url').notNullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

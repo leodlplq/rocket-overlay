@@ -13,6 +13,9 @@ export default class Overlay extends BaseModel {
   @column()
   declare videoUrl: string | null
 
+  @column()
+  declare imageUrl: string
+
   @column({ serializeAs: null })
   declare active: boolean
 

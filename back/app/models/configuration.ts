@@ -20,7 +20,11 @@ export default class Configuration extends BaseModel {
   @column()
   declare gameTitle: string | null
 
-  @column()
+  @column({
+    serialize(value) {
+      return Number.parseInt(value)
+    },
+  })
   declare numberOfGames: number | null
 
   @column()

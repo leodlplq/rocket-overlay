@@ -4,7 +4,7 @@ import {
   RadioGroup as HeadlessRadioGroup,
   type FieldProps as HeadlessFieldProps,
   type RadioGroupProps as HeadlessRadioGroupProps,
-  type RadioProps as HeadlessRadioProps
+  type RadioProps as HeadlessRadioProps,
 } from '@headlessui/react'
 import { clsx } from 'clsx'
 
@@ -17,8 +17,7 @@ export function RadioGroup({ className, ...props }: HeadlessRadioGroupProps) {
         className,
 
         // Basic groups
-        'space-y-3 [&_[data-slot=label]]:font-normal',
-
+        '[&_[data-slot=label]]:font-normal',
         // With descriptions
         'has-[[data-slot=description]]:space-y-6 [&_[data-slot=label]]:has-[[data-slot=description]]:font-medium'
       )}
@@ -35,7 +34,7 @@ export function RadioField({ className, ...props }: HeadlessFieldProps) {
         className,
 
         // Base layout
-        'grid grid-cols-[1.125rem_1fr] items-center gap-x-4 gap-y-1 sm:grid-cols-[1rem_1fr]',
+        'grid grid-cols-[1.125rem_1fr] items-center gap-x-2 gap-y-1 sm:grid-cols-[1rem_1fr]',
 
         // Control layout
         '[&>[data-slot=control]]:col-start-1 [&>[data-slot=control]]:row-start-1 [&>[data-slot=control]]:justify-self-center',
@@ -89,17 +88,17 @@ const base = [
   // Disabled state
   'group-data-[disabled]:opacity-50',
   'group-data-[disabled]:border-zinc-950/25 group-data-[disabled]:bg-zinc-950/5 group-data-[disabled]:[--radio-checked-indicator:theme(colors.zinc.950/50%)] group-data-[disabled]:before:bg-transparent',
-  'dark:group-data-[disabled]:border-white/20 dark:group-data-[disabled]:bg-white/[2.5%] dark:group-data-[disabled]:[--radio-checked-indicator:theme(colors.white/50%)] dark:group-data-[disabled]:group-data-[checked]:after:hidden'
+  'dark:group-data-[disabled]:border-white/20 dark:group-data-[disabled]:bg-white/[2.5%] dark:group-data-[disabled]:[--radio-checked-indicator:theme(colors.white/50%)] dark:group-data-[disabled]:group-data-[checked]:after:hidden',
 ]
 
 const colors = {
   'dark/zinc': [
     '[--radio-checked-bg:theme(colors.zinc.900)] [--radio-checked-border:theme(colors.zinc.950/90%)] [--radio-checked-indicator:theme(colors.white)]',
-    'dark:[--radio-checked-bg:theme(colors.zinc.600)]'
+    'dark:[--radio-checked-bg:theme(colors.zinc.600)]',
   ],
   'dark/white': [
     '[--radio-checked-bg:theme(colors.zinc.900)] [--radio-checked-border:theme(colors.zinc.950/90%)] [--radio-checked-indicator:theme(colors.white)]',
-    'dark:[--radio-checked-bg:theme(colors.white)] dark:[--radio-checked-border:theme(colors.zinc.950/15%)] dark:[--radio-checked-indicator:theme(colors.zinc.900)]'
+    'dark:[--radio-checked-bg:theme(colors.white)] dark:[--radio-checked-border:theme(colors.zinc.950/15%)] dark:[--radio-checked-indicator:theme(colors.zinc.900)]',
   ],
   white:
     '[--radio-checked-bg:theme(colors.white)] [--radio-checked-border:theme(colors.zinc.950/15%)] [--radio-checked-indicator:theme(colors.zinc.900)]',
@@ -130,7 +129,7 @@ const colors = {
   fuchsia:
     '[--radio-checked-indicator:theme(colors.white)] [--radio-checked-bg:theme(colors.fuchsia.500)] [--radio-checked-border:theme(colors.fuchsia.600/90%)]',
   pink: '[--radio-checked-indicator:theme(colors.white)] [--radio-checked-bg:theme(colors.pink.500)] [--radio-checked-border:theme(colors.pink.600/90%)]',
-  rose: '[--radio-checked-indicator:theme(colors.white)] [--radio-checked-bg:theme(colors.rose.500)] [--radio-checked-border:theme(colors.rose.600/90%)]'
+  rose: '[--radio-checked-indicator:theme(colors.white)] [--radio-checked-bg:theme(colors.rose.500)] [--radio-checked-border:theme(colors.rose.600/90%)]',
 }
 
 type Color = keyof typeof colors
@@ -144,8 +143,7 @@ export function Radio({
     <HeadlessRadio
       data-slot="control"
       {...props}
-      className={clsx(className, 'group inline-flex focus:outline-none')}
-    >
+      className={clsx(className, 'group inline-flex focus:outline-none')}>
       <span className={clsx([base, colors[color]])}>
         <span
           className={clsx(

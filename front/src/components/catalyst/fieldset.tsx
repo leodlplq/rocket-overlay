@@ -8,7 +8,7 @@ import {
   type FieldProps as HeadlessFieldProps,
   type FieldsetProps as HeadlessFieldsetProps,
   type LabelProps as HeadlessLabelProps,
-  type LegendProps as HeadlessLegendProps
+  type LegendProps as HeadlessLegendProps,
 } from '@headlessui/react'
 import clsx from 'clsx'
 import type React from 'react'

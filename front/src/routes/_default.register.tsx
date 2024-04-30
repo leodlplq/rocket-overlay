@@ -17,7 +17,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { enqueueSnackbar } from 'notistack'
 import { useContext } from 'react'
 
-export const Route = createFileRoute('/register')({
+export const Route = createFileRoute('/_default/register')({
   beforeLoad: ({ context }) => {
     if (context.user) {
       throw redirect({
@@ -80,6 +80,7 @@ const Register = () => {
                 type="email"
                 onChange={(e) => field.handleChange(e.target.value)}
                 placeholder="zen@vitality.com"
+                autoComplete="email"
                 invalid={hasError(error, 'email')}
               />
               {hasError(error, 'email') && (
@@ -101,6 +102,7 @@ const Register = () => {
                   type="text"
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Alexis"
+                  autoComplete="given-name"
                   invalid={hasError(error, 'firstname')}
                 />
                 {hasError(error, 'firstname') && (
@@ -123,6 +125,7 @@ const Register = () => {
                   type="text"
                   onChange={(e) => field.handleChange(e.target.value)}
                   placeholder="Bernier"
+                  autoComplete="family-name"
                   invalid={hasError(error, 'lastname')}
                 />
                 {hasError(error, 'lastname') && (
@@ -147,6 +150,7 @@ const Register = () => {
                 type="text"
                 onChange={(e) => field.handleChange(e.target.value)}
                 placeholder="Zen"
+                autoComplete="username"
                 invalid={hasError(error, 'username')}
               />
               {hasError(error, 'username') && (
@@ -171,6 +175,7 @@ const Register = () => {
                 onChange={(e) => field.handleChange(e.target.value)}
                 showEyeIcon
                 placeholder="••••••"
+                autoComplete="new-password"
                 invalid={hasError(error, 'password')}
               />
               {hasError(error, 'password') && (

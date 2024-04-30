@@ -49,10 +49,11 @@ export default class ConfigurationsController {
     await bouncer.authorize('editConfiguration', configuration)
 
     const data = await request.validateUsing(updateConfigurationValidator)
+    console.log(data.use_ingame_names, !!data.use_ingame_names)
 
     if (data.game_title) configuration.gameTitle = data.game_title
     if (data.number_of_games) configuration.numberOfGames = data.number_of_games
-    if (data.use_ingame_names) configuration.useIngameNames = data.use_ingame_names
+    configuration.useIngameNames = !!data.use_ingame_names
     if (data.team_one_name) configuration.teamOneName = data.team_one_name
     if (data.team_one_score) configuration.teamOneScore = data.team_one_score
     if (data.team_one_goals) configuration.teamOneGoals = data.team_one_goals
