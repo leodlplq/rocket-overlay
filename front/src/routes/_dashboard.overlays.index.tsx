@@ -13,6 +13,7 @@ function getConfigurationsOptions(token: string | undefined) {
   return queryOptions<Configuration[]>({
     queryKey: ['getConfigurations'],
     queryFn: () => getConfigurations(token || ''),
+    retry: false,
   })
 }
 

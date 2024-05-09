@@ -1,6 +1,7 @@
 import { Configuration } from '#types/configuration.js'
 import { makeUrl } from '#utils/url.js'
 import axios from 'axios'
+import { enqueueSnackbar } from 'notistack'
 
 export const getConfigurations = (token: string): Promise<Configuration[]> => {
   const config = {
@@ -10,6 +11,9 @@ export const getConfigurations = (token: string): Promise<Configuration[]> => {
     .get(makeUrl('configurations'), config)
     .then((res) => res.data)
     .catch((error) => {
+      enqueueSnackbar('Erreur server', {
+        variant: 'error',
+      })
       throw error?.response?.data.errors
     })
 }
@@ -24,6 +28,9 @@ export const getConfiguration = (
     .get(makeUrl(`configurations/${uuid}`), config)
     .then((res) => res.data)
     .catch((error) => {
+      enqueueSnackbar('Erreur server', {
+        variant: 'error',
+      })
       throw error?.response?.data.errors
     })
 }

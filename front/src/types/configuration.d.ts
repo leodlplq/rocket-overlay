@@ -13,11 +13,11 @@ export interface Configuration {
   teamOneName: null | string
   teamOneScore: null | string
   teamOneGoals: null | string
-  teamOneImage: null | string
+  teamOneImage: null | string | File
   teamTwoName: null | string
   teamTwoScore: null | string
   teamTwoGoals: null | string
-  teamTwoImage: null | string
+  teamTwoImage: null | string | File
 }
 
 interface NewConfigurationPayload {

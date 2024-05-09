@@ -18,6 +18,7 @@ import { AuthContextType } from '#types/user.js'
 import { getError, hasError } from '#utils/errors.js'
 import { useForm } from '@tanstack/react-form'
 import { useMutation } from '@tanstack/react-query'
+import { enqueueSnackbar } from 'notistack'
 import { useContext } from 'react'
 
 interface IUpdateConfigurationProps {
@@ -37,11 +38,9 @@ export const UpdateConfigurationForm = ({
       return updateConfiguration(payload, data.uuid, user?.token || '')
     },
     onSuccess: () => {
-      console.log('success!')
+      enqueueSnackbar('Overlay modifié !', { variant: 'success' })
     },
   })
-
-  console.log(data?.useIngameNames !== 0)
 
   const form = useForm({
     defaultValues: {
@@ -58,7 +57,6 @@ export const UpdateConfigurationForm = ({
       team_two_image: null,
     },
     onSubmit: async ({ value }) => {
-      console.log(value)
       mutate(value)
     },
   })

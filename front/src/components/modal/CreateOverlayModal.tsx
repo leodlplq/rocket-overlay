@@ -47,7 +47,11 @@ export const CreateOverlayModal = ({ open, setOpen }: ICreateOverlayModal) => {
       }
     },
   })
-  const { data } = useQuery({ queryKey: ['overlays'], queryFn: getOverlays })
+  const { data } = useQuery({
+    queryKey: ['overlays'],
+    queryFn: getOverlays,
+    retry: false,
+  })
   const [selectedElement, setSelectedElement] = useState<SelectElement | null>(
     null
   )
