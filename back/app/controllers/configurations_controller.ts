@@ -1,4 +1,5 @@
 import Configuration from '#models/configuration'
+import { pusher } from '#start/pusher'
 import {
   createConfigurationValidator,
   updateConfigurationValidator,
@@ -78,6 +79,7 @@ export default class ConfigurationsController {
     configuration.save()
 
     // TODO: handle realtime database updates with pusher
+    pusher.trigger(`overlay-${configuration.uuid}`, 'update', {})
     return configuration
   }
 }
